@@ -1,5 +1,9 @@
 package com.codegym;
 
+import com.codegym.repository.CustomerRepository;
+import com.codegym.repository.impl.CustomerRepositoryImpl;
+import com.codegym.service.CustomerService;
+import com.codegym.service.impl.CustomerServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -114,6 +118,16 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         properties.setProperty("hibernate.show_sqp", evn.getProperty("hibernate.show_sql"));
         properties.setProperty("hibernate.hbm2ddl.auto", evn.getProperty("hibernate.hbm2ddl.auto"));
         return properties;
+    }
+
+    @Bean
+    public CustomerRepository customerRepository(){
+        return new CustomerRepositoryImpl();
+    }
+
+    @Bean
+    public CustomerService customerService(){
+        return new CustomerServiceImpl();
     }
 
 }
